@@ -1,2 +1,93 @@
 SQl Questions: 
 
+ a. The names of all employees that have an order with Bamsonic.
+ 
+ SELECT e.name
+ FROM employee e, customer c, order o
+ WHERE c.id = o.cust_id 
+ AND e.id = o.employee_id
+ and c.name = "Bamsonic"; 
+ 
+ 
+ b. The names of all employees that do not have any order with Bamsonic.
+ 
+ SELECT name 
+ FROM employee
+ WHERE id NOT IN (
+                  SELECT o.employee_id
+                  FROM customr c, order o
+                  WHERE c.id = o.cust_id
+                  AND c.name = "Bamsonic"
+                  );
+                  
+
+c. The names of employees that have 2 or more orders.
+
+SELECT e.name
+FROM employee e
+WHERE e.id IN (
+                SELECT employee_id
+                FROM order
+                GROUP BY employee_id
+                HAVING COUNT(*) >= 2
+              );
+              
+  
+d. Write a SQL statement to insert rows into a table called high_value_employee(name,
+age), where an employee must have a salary of 100,000 or greater to be included in
+the table. 
+
+CREATE TABLE high-value-employee(
+  name VARCHAR(40) NOT NULL,
+  age TINYINT NOT NULL
+);
+
+CREATE TRIGGER high_salary_check BEFORE INSERT ON high_value_employee
+FOR EACH ROW 
+  BEGIN
+  IF(EXIST( SELECT name FROM employee WHERE salary >= 100000)) THEN
+  INSERT INTO high_value_salary
+  VALUES(name, age);
+  END IF;
+END;
+
+
+e. Write the appropriate "CREATE TABLE" statements for all base tables (employee,
+customer, order) and shortly describe the choices you made.
+
+CREATE TABLE employee(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(40) NOT NULL,
+  age TINYINT,
+  salary DECIMAL(15,2),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE customer(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(40) NOT NULL,
+  city VARCHAR(30),
+  industry_type CHAR(1), -- or better ENUM('J','B')
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE order(
+  id INT NOT NULL AUTO_INCREMENT,
+  orderDate DATE NOT NULL,
+  cust_id INT NOT NULL,
+  employee_id INT,
+  amount INT,
+  PRIMARY KEY (id)
+  FOREIGN KEY (employee_id) REFERENCES employee(id);
+  FOREIGN KEY (cust_id) REFERENCES customer(id);
+);
+
+f. In part d, I would use 'employee_id' rather than 'name' to inser in the new table, because name might be not unique. 
+
+
+
+
+
+
+
+                  
