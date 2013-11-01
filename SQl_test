@@ -85,6 +85,39 @@ CREATE TABLE order(
 f. In part d, I would use 'employee_id' rather than 'name' to inser in the new table, because name might be not unique. 
 
 
+ESSAY Questions: 
+
+- Describe your experiences with NoSQL and SQL technology and where you would
+choose one over the other.
+
+SQL has a strong mathematical theory behind itself. It is consistant and reliable by preserving ACID characteristics
+which makes it ideal choise when dealing with transactions.
+
+NoSQL on the other hand is shemaless, no needs normalization which makes it highly responsive, and is horizontally 
+scalable which makes it suitable for bigdata manipulation. 
+
+I would choose SQL if I am going to deal with persistant and sensitive data which accurcy is of more importance like banking 
+transactions. NoQSL is good when dealing with huge amount of data and availability of the system is a requirement like facebook. 
+
+- Explain the neccessity, advantages and disadvantages of sharding and your
+experience with it.
+
+When the amount of data is increasing heavily and the size of database grows, you should find out a way of managing this data. 
+In NoSQL, adding more machines will alleviate the problem (horizontal scaling). Whilevwhen it comes to RDBMS, by their nature,
+scaling comes with a high cost of replacing existing single machine with a stronge one (vertical scaling). Here is where 
+sharding comes to the scene. By sharding, we break the large database into smaller and faster parts. This makes the response 
+time of the database ver fast. Since RDBMS do not support sharding natively, an (massive) effort is needed to take on the 
+work of deploying it accross the number of machines. Additionlly, sometimes benefits of RDBMS such as integrity is sacrified 
+to achieve this goal. 
+
+- What single project or task would you consider the most significant accomplishment
+in your career so far and why?
+
+Academically, I ranked less than top 1% in the most copetitive nationwide exam among more than 22,000 attendees. 
+Practically, I implemented a unique solution for dynamic Identity recognition when I was an intern at Smart Kitchen lab
+in Umea university, Sweden. 
+
+
 
 
 
